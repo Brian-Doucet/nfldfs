@@ -58,6 +58,7 @@ def games_to_search(dfs_site, season_from, week_from, season_to=None,
 
 # Function to take game_urls and return data
 def get_game_data(game_urls=[]):
+
     all_data = pd.DataFrame()
 
     for g in game_urls:
