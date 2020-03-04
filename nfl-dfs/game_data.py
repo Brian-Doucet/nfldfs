@@ -77,9 +77,9 @@ def get_game_data(game_urls=[]):
         week            week during the season the game was played (as `int`)
         year            the season number (as `int`)
         player_name     the full name of the player as Last Name, First Name (as `str`)
-        position        players position
+        position        player's position (as `str`)
         team_name       team the player is member of, abbreviation (as `str`)
-        home_or_away    indicates if the player's team was home or away
+        home_or_away    indicates if the player's team was home or away (as `str`)
         opponent_name   opponent name, abbreviation (as `str`)
         points          total daily fantasy points scored, site specific (as `float`)
         salary          daily fantasy salary, site specific (as `float`)
