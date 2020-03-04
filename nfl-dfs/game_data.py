@@ -22,7 +22,7 @@ def games_to_search(dfs_site, season_from, week_from, season_to=None,
             expressed in whole years.
         week_from (int): The week number to begin search.
         season_to (int): Season number to search for data up to
-            (inclusive, default is None)
+
         week_to (int): The week number to search for data up to
             (inclusive, default is None)
 
@@ -58,6 +58,33 @@ def games_to_search(dfs_site, season_from, week_from, season_to=None,
 
 # Function to take game_urls and return data
 def get_game_data(game_urls=[]):
+    """Returns a pandas DataFrame
+
+    Use this function to scrape NFL daily fantasy results data from www.rotoguru1.com
+    by passing a list of URLs.
+
+    Parameters
+    ----------
+    game_urls : list of strings
+        List of URL strings with each element being a specific URL
+
+    Returns
+    -------
+    pd.DataFrame
+        Data values include:
+        =============   ===============================================================
+        gid             unique id for each player (as `int`)
+        week            week during the season the game was played (as `int`)
+        year            the season number (as `int`)
+        player_name     the full name of the player as Last Name, First Name (as `str`)
+        position        players position
+        team_name       team the player is member of, abbreviation (as `str`)
+        home_or_away    indicates if the player's team was home or away
+        opponent_name   opponent name, abbreviation (as `str`)
+        points          total daily fantasy points scored, site specific (as `float`)
+        salary          daily fantasy salary, site specific (as `float`)
+        ==============  =================================================================
+    """
 
     all_data = pd.DataFrame()
 
