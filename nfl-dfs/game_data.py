@@ -1,41 +1,46 @@
+#!/usr/bin/env python
+
 import itertools
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
 from io import StringIO
 from urllib.parse import urlparse
 
+from bs4 import BeautifulSoup
+import pandas as pd
+import requests
+
 
 # Function to create game search parameters
-def games_to_search(dfs_site, season_from, week_from, season_to=None,
-                    week_to=None):
-    """Returns a list of URLs.
+def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
+    """
+    Returns a list of URLs.
 
     Use this function to generate a list of URLs that can be used to fetch
     NFL daily fantasy results for DraftKings, FanDuel, and Yahoo! Fantasy.
 
-    Args:
-        dfs_site (str): Abbreviation for each daily fantasy site to include.
-            Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!.
-            Use a list to pass in multiple values.
-        season_from (int): The season number to begin search. Seasons are
-            expressed in whole years.
-        week_from (int): The week number to begin search.
-        season_to (int): Season number to search for data up to
+    Parameters
+    ----------
+    dfs_site : str, list of str
+        Abbreviation for each daily fantasy site to find data for.
+        Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!
+    season_from: int
+        The season number to begin search range.
+    week_to : int
+        The week of the season to begin search range
+    season_to : int, default None
+        The season number to search for data up to, inclusive.
+    week_to : int, default None
+        week_to (int): The week number to search for data up to, inclusive.
 
-        week_to (int): The week number to search for data up to
-            (inclusive, default is None)
+    Returns
+    -------
+    A list of formatted URL strings
 
-    Returns:
-        list: A list of URLs with formatted query strings.
-
-    Example:
-        Return a list of search URLs for week 1 of the 2014 season across
-            DraftKings and FanDuel.
-
-        >>> games_to_search(['dk', 'fd'], 2014, 1)
-        ['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1',
-        'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
+    Example
+    -------
+    URLs for week 1 of the 2014 season for DraftKings and FanDuel.
+    >>> find_games(dfs_site=['dk', 'fd'], season_from=2014, week_from=1)
+    ['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1',
+    'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
     """
 
     season_to_range = season_to
@@ -52,16 +57,18 @@ def games_to_search(dfs_site, season_from, week_from, season_to=None,
     weeks = [*range(week_from, week_to_range + 1)]
 
     base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game={}&scsv=1"
-    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(weeks, seasons, games)]
+    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(weeks,seasons, games)]
 
     return game_urls
 
+
 # Function to take game_urls and return data
 def get_game_data(game_urls=[]):
-    """Returns a pandas DataFrame
+    """
+    Returns a pandas DataFrame
 
-    Use this function to scrape NFL daily fantasy results data from www.rotoguru1.com
-    by passing a list of URLs.
+    Use this function to scrape NFL daily fantasy results data from
+    www.rotoguru1.com by passing a list of URLs.
 
     Parameters
     ----------
@@ -72,18 +79,19 @@ def get_game_data(game_urls=[]):
     -------
     pd.DataFrame
         Data values include:
-        =============   ===============================================================
-        gid             unique id for each player (as `int`)
-        week            week during the season the game was played (as `int`)
-        year            the season number (as `int`)
-        player_name     the full name of the player as Last Name, First Name (as `str`)
-        position        player's position (as `str`)
-        team_name       team the player is member of, abbreviation (as `str`)
-        home_or_away    indicates if the player's team was home or away (as `str`)
-        opponent_name   opponent name, abbreviation (as `str`)
-        points          total daily fantasy points scored, site specific (as `float`)
-        salary          daily fantasy salary, site specific (as `float`)
-        ==============  =================================================================
+        =============   =======================================================
+        gid             Unique id for each player (as `int`)
+        week            The week number (as `int`)
+        year            The season number (as `int`)
+        player_name     Full player name, [Last Name, First Name] (as `str`)
+        position        Player position, e.g. QB, TE, and Def (as `str`)
+        team_name       Team the player is member of, abbreviation (as `str`)
+        home_or_away    Identifies if a player was home or away (as `str`)
+        opponent_name   Opponent name, abbreviation (as `str`)
+        points          Total daily fantasy points scored (as `float`)
+        salary          Daily fantasy salary, site specific (as `float`)
+        dfs_site        Value indicating which dfs site the data relates to
+        ==============  =======================================================
     """
 
     all_data = pd.DataFrame()
