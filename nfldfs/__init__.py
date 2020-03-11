@@ -1,2 +1,2 @@
-from .utils import find_games
-from .utils import get_game_data
+from .games import find_games
+from .games import get_game_data
