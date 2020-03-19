@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
+import utils
 
 
 # Function to create game search parameters
@@ -19,7 +20,7 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     Parameters
     ----------
-    dfs_site : str, list of str
+    dfs_site : list of str
         Abbreviation for each daily fantasy site to find data for.
         Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!
     season_from: int
@@ -51,6 +52,10 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     if not week_to_range:
         week_to_range = week_from
+        
+    for site in dfs_site:
+        if not utils.game_parameters_validator(site, season_from):
+            raise Exception('Invalid year')
 
     games = dfs_site
     seasons = [*range(season_from, season_to_range + 1)]
@@ -122,3 +127,9 @@ def get_game_data(game_urls=[]):
         all_data = pd.concat(objs=[all_data, data])
 
     return(all_data)
+
+
+a = find_games(['dk', 'fd'], 2017, 5)
+
+data = get_game_data(a)
+print(data)
