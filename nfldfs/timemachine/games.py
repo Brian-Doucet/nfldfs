@@ -3,6 +3,7 @@
 import itertools
 from io import StringIO
 from urllib.parse import urlparse
+import time
 
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -54,8 +55,9 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
         week_to_range = week_from
         
     for site in dfs_site:
-        if not utils.game_parameters_validator(site, season_from):
-            raise Exception('Invalid year')
+        utils.game_parameters_validator(site, season_from)
+            
+            
 
     games = dfs_site
     seasons = [*range(season_from, season_to_range + 1)]
@@ -126,10 +128,15 @@ def get_game_data(game_urls=[]):
         data['dfs_site'] = game
         all_data = pd.concat(objs=[all_data, data])
 
+        time.sleep(0.5)
+        
+
     return(all_data)
 
 
-a = find_games(['dk', 'fd'], 2017, 5)
-
-data = get_game_data(a)
-print(data)
+def main():
+    a = find_games(['dk', 'fd'], 2019, 5)
+    data = get_game_data(a)
+    print(data)
+    
+main()

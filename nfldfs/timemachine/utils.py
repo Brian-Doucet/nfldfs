@@ -14,15 +14,17 @@ def game_parameters_validator(dfs_site, season_number):
               'yh': [2016, 2017, 2018, 2019]}
 
     season_numbers = config.get(dfs_site)
+    
     if not season_numbers:
-        print('Enter a valid dfs site')
-        print('{} are valid dfs sites'.format(config.keys()))
+        raise Exception('Invalid dfs site')
+    
 
     for season in season_numbers:
         if season_number == season:
-            return True
-
+            return
+        
+        
     print('{} is out of range'.format(season_number))
     print('{} are valid years'.format(season_numbers))
 
-    return False
+    raise Exception('Invalid year')
