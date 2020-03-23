@@ -2,7 +2,7 @@
 *.pyc
 
 .idea
-.vscodegit
+.vscode
 
 .coverage
 *__pycache__/*
