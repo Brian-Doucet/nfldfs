@@ -1,0 +1,9 @@
+# Compiled Python
+*.pyc
+
+.idea
+.vscodegit
+
+.coverage
+.pytest_cache
+
