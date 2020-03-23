@@ -135,8 +135,9 @@ def get_game_data(game_urls=[]):
 
 
 def main():
-    a = find_games(['dk', 'fd'], 2019, 5)
+    a = find_games(['dk', 'fd'], 2019, 1)
     data = get_game_data(a)
-    print(data)
+    print(data.head(10))
+    print(data.info())  
     
 main()
