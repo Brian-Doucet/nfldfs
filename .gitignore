@@ -1,0 +1,8 @@
+# Compiled Python
+*.pyc
+
+.idea
+.vscode
+
+.coverage
+*__pycache__/*
