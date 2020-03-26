@@ -53,11 +53,11 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     if not week_to_range:
         week_to_range = week_from
-        
+
     for site in dfs_site:
         utils.game_parameters_validator(site, season_from)
-            
-            
+
+
 
     games = dfs_site
     seasons = [*range(season_from, season_to_range + 1)]
@@ -129,7 +129,7 @@ def get_game_data(game_urls=[]):
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.5)
-        
+
 
     return(all_data)
 
@@ -138,6 +138,6 @@ def main():
     a = find_games(['dk', 'fd'], 2019, 1)
     data = get_game_data(a)
     print(data.head(10))
-    print(data.info())  
-    
+    print(data.info())
+
 main()
