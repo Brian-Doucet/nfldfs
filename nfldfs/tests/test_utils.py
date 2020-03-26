@@ -1,22 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 18 20:28:43 2020
+
+@author: bdoucet
+"""
+
+
 import pytest
 import nfldfs.utils as utils
-#print(utils.game_parameters_validator('dk', 2019))
 
-# Assert this returns the no errors
+
+# These are valid parameters and should return no errors
 def test_game_parameters_validator_pass():
     assert utils.game_parameters_validator('dk', 2019) == None
+    assert utils.game_parameters_validator('fd', 2014) == None
+    assert utils.game_parameters_validator('yh', 2016) == None
 
-# Assert that this raises an error for invalid dfs site
+# Raise an error for invalid dfs site
 def test_game_parameters_validator_raise_error_site():
 
     with pytest.raises(Exception) as info:
         utils.game_parameters_validator('dd', '2019')
 
-
     assert "Invalid dfs site" in str(info.value)
 
 
-# Assert this raises an error for invalid year
+# Raise an error for invalid year
 def test_game_parameters_validator_raise_error_year():
 
     with pytest.raises(Exception) as info:
