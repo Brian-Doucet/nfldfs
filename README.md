@@ -7,18 +7,19 @@ Simple package for those looking to collect historical NFL daily fantasy salarie
 + Work with results as a pandas DataFrame
 
 ## Installation
-You'll need at least Python 3 to run nfldfs.
+$ virtualenv ~/.virtualenvs/test
+$ . ~/.virtualenvs/test/bin/activate
 
 1. `git clone https://github.com/BrianDoucet01/daily-fantasy-sports.git`
-2. cd `nfldfs`
-3. Run `pip install -r requirements.txt`
+2. cd `daily-fantasy-sports`
+3. Create virtual environment: `virtualenv ~/.virtualenvs/nfldfs`
+4. Activate virtual environment: `. ~/.virtualenvs/nfldfs/bin/activate`
+4. Run `pip install -r requirements.txt`
 
-### Using the package
+## Using the package
 
 
 ```Python
-# Adding usage examples
-
-
+# Usage examples to follow
 
 ```
