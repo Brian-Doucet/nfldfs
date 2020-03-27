@@ -134,10 +134,8 @@ def get_game_data(game_urls=[]):
     return(all_data)
 
 
-def main():
-    a = find_games(['dk', 'fd'], 2019, 1)
-    data = get_game_data(a)
-    print(data.head(10))
-    print(data.info())
-
-main()
+def get_expensive_players(dfs_site, season_from, week_from, position):
+    pass
+    # Call find_games
+    # Pass list of games to get_game_data
+    # Filter game data to find most expensive players by position
