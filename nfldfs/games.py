@@ -8,7 +8,7 @@ import time
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-import utils
+from nfldfs import utils as utils
 
 
 # Function to create game search parameters
