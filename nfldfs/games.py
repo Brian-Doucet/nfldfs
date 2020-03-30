@@ -6,8 +6,10 @@ from urllib.parse import urlparse
 import time
 
 from bs4 import BeautifulSoup
+import numpy as np
 import pandas as pd
 import requests
+
 from nfldfs import utils as utils
 
 
@@ -57,8 +59,6 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     for site in dfs_site:
         utils.game_parameters_validator(site, season_from)
 
-
-
     games = dfs_site
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
@@ -100,12 +100,11 @@ def get_game_data(game_urls=[]):
         dfs_site        Value indicating which dfs site the data relates to
         ==============  =======================================================
     """
-
     all_data = pd.DataFrame()
 
     for g in game_urls:
         # Parse the game from the query string to use as column value
-        game = urlparse(g).query[22:24]
+        #game = urlparse(g).query[22:24]
         response = requests.get(g).text
         soup = BeautifulSoup(response, "lxml")
         data_string = StringIO(soup.find("pre").text)
@@ -125,17 +124,9 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = game
+        data['dfs_site'] = np.where(data['week'] >=10, urlparse(g).query[23:25], urlparse(g).query[22:24])
         all_data = pd.concat(objs=[all_data, data])
 
-        time.sleep(0.5)
-
+        time.sleep(0.25)
 
     return(all_data)
-
-
-def get_expensive_players(dfs_site, season_from, week_from, position):
-    pass
-    # Call find_games
-    # Pass list of games to get_game_data
-    # Filter game data to find most expensive players by position
