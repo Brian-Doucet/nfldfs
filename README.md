@@ -134,7 +134,7 @@ yh       5631           car    14.7    10.0       yh
 
 ### Using the CLI
 
-<img src="cli-demo.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
+<img src="cli.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
 
 
 ## Future Work
