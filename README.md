@@ -1,12 +1,16 @@
 # nfldfs
 
-[![codecov](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports/branch/master/graph/badge.svg)](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports/branch/master/graph/badge.svg)](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![HitCount](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports.svg)](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports)
 
 `nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape data for DraftKings, FanDuel, and Yahoo! from [rotoguru1](http://rotoguru.net) so that you don't have to.
 
 * [Features](https://github.com/BrianDoucet01/daily-fantasy-sports#features)
 * [Installation](https://github.com/BrianDoucet01/daily-fantasy-sports#installation)
 * [Usage](https://github.com/BrianDoucet01/daily-fantasy-sports#usage)
+  * [IPython or Jupyter](https://github.com/BrianDoucet01/daily-fantasy-sports#ipython-or-jupyter-notebook)
+  * [Use the CLI tool](https://github.com/BrianDoucet01/daily-fantasy-sports#using-the-cli)
 * [Future Work](https://github.com/BrianDoucet01/daily-fantasy-sports#future-work)
 
 
@@ -52,7 +56,9 @@ pip install -r requirements.txt
 
 
 ## Usage
-Here are some quick and dirty examples that review how to import the package, search for dfs stats and scrape data. For more robust examples and usage, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
+Here are some quick and dirty examples that review how to import the package, search for dfs stats and scrape data. For more robust examples and a data dictionary, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
+
+### IPython or Jupyter Notebook
 
 **Get DraftKings salary and points data for the entire 2019 season.**
 
@@ -125,6 +131,11 @@ yh       5631           car    14.7    10.0       yh
 
 
 ```
+
+### Using the CLI
+
+<img src="cli-demo.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
+
 
 ## Future Work
 * Adding additional functionality to the CLI
