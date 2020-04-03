@@ -1,20 +1,30 @@
 # nfldfs
 
-`nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape daily fantasy results for DraftKings, FanDuel, and Yahoo! so that you don't have to.
+[![codecov](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports/branch/master/graph/badge.svg)](https://codecov.io/gh/BrianDoucet01/daily-fantasy-sports) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+`nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape data for DraftKings, FanDuel, and Yahoo! from [rotoguru1](http://rotoguru.net) so that you don't have to.
+
+* [Features](https://github.com/BrianDoucet01/daily-fantasy-sports#features)
+* [Installation](https://github.com/BrianDoucet01/daily-fantasy-sports#installation)
+* [Usage](https://github.com/BrianDoucet01/daily-fantasy-sports#usage)
+* [Future Work](https://github.com/BrianDoucet01/daily-fantasy-sports#future-work)
 
 ## Features
 
 + Search for data using combinations of season and week
 + Return data only for the daily fantasy sites you care about
-+ Work with results as a pandas DataFrame
++ Work with results as a pandas DataFrame or use the CLI to output results directly to a `.csv`
 
 ## Installation
-In addition to [pip](https://pip.pypa.io/en/stable/) you will also need [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) installed.
+`nfldfs` is supported for Python 3 can be installed from the repo. You'll need [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) installed.
+
+*These are the steps for getting your dev environment up and running on a Mac*
 
 ```bash
 # Clone the repo
 git clone https://github.com/BrianDoucet01/daily-fantasy-sports.git
 cd daily-fantasy-sports
+tree
 
 # If cloned successfully your directory structure should look like this
 ├── LICENSE
@@ -31,7 +41,7 @@ cd daily-fantasy-sports
 
 # Create a virtual environment for nfldfs and then activate it
 virtualenv ~/virtualenvs/nfldfs -p python3 --no-site-packages
-. ~/virtualenvs/bfl/bin/activate
+. ~/virtualenvs/nfl/bin/activate
 
 # Install the project requirements
 pip install -r requirements.txt
@@ -39,8 +49,9 @@ pip install -r requirements.txt
 
 ```
 ## Usage
+Here are some quick and dirty examples that review how to import the package, search for dfs stats and scrape data. For more robust examples and usage, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
 
-Get DraftKings salary and points data for the entire 2019 season.
+**Get DraftKings salary and points data for the entire 2019 season.**
 
 ```Python
 from nfldfs import games as games
@@ -86,7 +97,8 @@ gid
 1519           nor   20.04  5100.0       dk  
 ```
 
-Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season
+
+**Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season.**
 
 ```python
 # Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season
@@ -110,3 +122,13 @@ yh       5631           car    14.7    10.0       yh
 
 
 ```
+
+## Future Work
+* Adding additional functionality to the CLI
+    * Options to preview data before output
+    * Functions for analysis
+* Incorporating more data:
+    * Weather
+    * Game schedules and slates (Main, Sunday Night etc...)
+* Scraping  points and salary data for the current season
+* Downloading projections that are available from various sites
