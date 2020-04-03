@@ -4,20 +4,33 @@ import pandas as pd
 from nfldfs import games as games
 
 
+# Welcome message
+print('Welcome to nfldfs!')
+print()
+
 # Options for command line interface
 @click.command()
-@click.option('--dfs_site', prompt='Which dfs site(s)?')
-@click.option('--season_from', type=int, prompt='For which season?')
-@click.option('--week_from', type=int, prompt='Week to begin search')
-@click.option('--nrows', type=int, prompt='Enter number of rows to return')
+@click.option('--dfs_site', required=True, prompt='Which dfs site(s)?', help='Name of the DFS site')
+@click.option('--season_from', required=True, type=int, prompt='Season beginning', help='The season numnber in the beginning search range')
+@click.option('--season_to', type=int, prompt='Season ending')
+@click.option('--week_from', required=True, type=int, prompt='Week beginning')
+@click.option('--week_to', type=int, prompt='Week ending')
+@click.option('--filename', type=str, prompt='Filename')
 
-def get_dfs_data(dfs_site, season_from, week_from, nrows):
+def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename):
+    """
+    Simple program to scrape NFL daily fantasy stats.
+    """
     dfs_site = [dfs_site]
-    g = games.find_games(dfs_site, season_from, week_from)
-    data = games.get_game_data(g)
+    g = games.find_games(dfs_site=dfs_site,
+                         season_from=season_from,
+                         week_from=week_from,
+                         season_to=season_to,
+                         week_to=week_to)
 
-    print("Success!")
-    print(f"Succesfully scraped {data.shape[0]} rows")
+    data = games.get_game_data(game_urls=g)
+
+    return data.to_csv(f'data/{filename}.csv')
 
 if __name__ == "__main__":
     get_dfs_data()
