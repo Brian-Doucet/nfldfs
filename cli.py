@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import click
-import pandas as pd
+
 from nfldfs import games as games
 
 
@@ -11,7 +11,7 @@ print()
 # Options for command line interface
 @click.command()
 @click.option('--dfs_site', required=True, prompt='Which dfs site(s)?', help='Name of the DFS site')
-@click.option('--season_from', required=True, type=int, prompt='Season beginning', help='The season numnber in the beginning search range')
+@click.option('--season_from', required=True, type=int, prompt='Season beginning', help='The season number in the beginning search range')
 @click.option('--season_to', type=int, prompt='Season ending')
 @click.option('--week_from', required=True, type=int, prompt='Week beginning')
 @click.option('--week_to', type=int, prompt='Week ending')
