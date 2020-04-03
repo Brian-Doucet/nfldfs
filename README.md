@@ -9,11 +9,13 @@
 * [Usage](https://github.com/BrianDoucet01/daily-fantasy-sports#usage)
 * [Future Work](https://github.com/BrianDoucet01/daily-fantasy-sports#future-work)
 
+
 ## Features
 
 + Search for data using combinations of season and week
 + Return data only for the daily fantasy sites you care about
 + Work with results as a pandas DataFrame or use the CLI to output results directly to a `.csv`
+
 
 ## Installation
 `nfldfs` is supported for Python 3 can be installed from the repo. You'll need [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) installed.
@@ -27,6 +29,7 @@ cd daily-fantasy-sports
 tree
 
 # If cloned successfully your directory structure should look like this
+# working in ~/daily-fantasy-sports
 ├── LICENSE
 ├── README.md
 ├── nfldfs
@@ -45,9 +48,9 @@ virtualenv ~/virtualenvs/nfldfs -p python3 --no-site-packages
 
 # Install the project requirements
 pip install -r requirements.txt
-
-
 ```
+
+
 ## Usage
 Here are some quick and dirty examples that review how to import the package, search for dfs stats and scrape data. For more robust examples and usage, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
 
