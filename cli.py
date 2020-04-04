@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import click
-import pandas as pd
+
 from nfldfs import games as games
 
 
