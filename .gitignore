@@ -7,3 +7,7 @@
 .coverage
 *__pycache__/*
 .pytest_cache
+
+
+# data
+data/*
