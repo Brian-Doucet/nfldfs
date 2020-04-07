@@ -11,3 +11,8 @@
 
 # data
 data/*
+
+.DS_Store
+
+# Scratch code
+dfstest.py
