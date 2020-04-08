@@ -10,7 +10,7 @@
 * [Features](https://github.com/BrianDoucet01/daily-fantasy-sports#features)
 * [Installation](https://github.com/BrianDoucet01/daily-fantasy-sports#installation)
 * [Usage](https://github.com/BrianDoucet01/daily-fantasy-sports#usage)
-  * [IPython or Jupyter](https://github.com/BrianDoucet01/daily-fantasy-sports#ipython-or-jupyter-notebook)
+  * [Work with it interactively](https://github.com/BrianDoucet01/daily-fantasy-sports#working-with-the-package-interactively)
   * [Use the CLI tool](https://github.com/BrianDoucet01/daily-fantasy-sports#using-the-cli)
 * [Future Work](https://github.com/BrianDoucet01/daily-fantasy-sports#future-work)
 
@@ -23,7 +23,7 @@
 
 
 ## Installation
-`nfldfs` is supported for Python 3 can be installed from the repo. You'll need [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) installed.
+`nfldfs` is supported for Python 3 and can be installed from the repo. You will need [pip](https://pip.pypa.io/en/stable/) installed. The package was created using a [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) and is recommended but not required.
 
 *These are the steps for getting your dev environment up and running on a Mac*
 
@@ -57,9 +57,13 @@ pip install -r requirements.txt
 
 
 ## Usage
-Here are some quick and dirty examples that review how to import the package, search for dfs stats and scrape data. For more robust examples and a data dictionary, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
 
-### IPython or Jupyter Notebook
+If you're just looking for a bulk data download, it's recommended that you use the [CLI](https://github.com/BrianDoucet01/daily-fantasy-sports#using-the-cli) tool. It exports results directly to the `nfldfs/data` directory in `.csv` format. Head over there to see a [sample](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/data) of DraftKings salary and points data for the entire 2017 season.
+
+Here are some quick and dirty examples that illustrate how how to work with the package interactively. For more robust examples and a data dictionary, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
+
+### Working with the package interactively
+Several examples to show how you could work with the package directly in [IPython](https://ipython.org/) or a [Jupyter Notebook](https://jupyter.org/).
 
 **Get DraftKings salary and points data for the entire 2019 season.**
 
@@ -134,8 +138,13 @@ yh       5631           car    14.7    10.0       yh
 ```
 
 ### Using the CLI
+The command line interface (CLI) was designed for those who just want to download a bunch of raw data to use elsewhere; be it a database, Excel, Google Sheets, or another program.
 
-<img src="cli.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
+You run the CLI tool by calling it directly from within the package directory. Results are sent to the `nfldfs/data` directory. Call `python cli.py --help` for more information on arguments and options.
+
+**Example using the CLI to produce the DraftKings sample**
+
+<img src="cli-demo.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
 
 
 ## Future Work
