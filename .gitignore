@@ -10,7 +10,7 @@
 
 
 # data
-data/*
+#data/*
 
 .DS_Store
 
