@@ -29,7 +29,7 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/BrianDoucet01/daily-fantasy-sports.git
+git clone https://github.com/BrianDoucet01/nfldfs.git
 cd daily-fantasy-sports
 tree
 
@@ -144,7 +144,7 @@ You run the CLI tool by calling it directly from within the package directory. R
 
 **Example using the CLI to produce the DraftKings sample**
 
-<img src="cli-demo.gif" alt="Using the nfldfs CLI" style="width: 500px;"/>
+![CLI tool](images/cli-demo.gif)
 
 
 ## Future Work
