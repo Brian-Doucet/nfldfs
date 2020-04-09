@@ -1,1 +1,1 @@
-py.test nfldfs  --cov-report=xml --cov=nfldfs --cov-config=.coveragerc
+pytest nfldfs  --cov-report xml:nfldfs/coverage.xml --cov=nfldfs --cov-config=.coveragerc
