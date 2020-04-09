@@ -1,12 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Testing Check
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches:
       - "*"
@@ -18,7 +16,18 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macOS-latest, windows-latest ]
-    steps: 
+        python-version: [3.7]
+    steps:
+      - uses: actions/setup-python@v1
+      - name: Check out repo
+        uses: actions/checkout@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependecies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
       - name: Run tests on new PR via pytest
         run: |
           echo running test suite
