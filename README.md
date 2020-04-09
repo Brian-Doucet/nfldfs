@@ -1,6 +1,7 @@
 # nfldfs
 
 [![codecov](https://codecov.io/gh/BrianDoucet01/nfldfs/branch/master/graph/badge.svg)](https://codecov.io/gh/BrianDoucet01/nfldfs)
+![Testing Check](https://github.com/BrianDoucet01/nfldfs/workflows/Testing%20Check/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![HitCount](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports.svg)](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
