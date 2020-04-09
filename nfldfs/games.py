@@ -28,12 +28,12 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
         Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!
     season_from: int
         The season number to begin search range.
-    week_to : int
+    week_from: int
         The week of the season to begin search range
     season_to : int, default None
         The season number to search for data up to, inclusive.
     week_to : int, default None
-        week_to (int): The week number to search for data up to, inclusive.
+        The week number to search for data up to, inclusive.
 
     Returns
     -------
@@ -47,24 +47,19 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
     """
 
-    season_to_range = season_to
-    week_to_range = week_to
+    season_to_range = season_to or season_from
 
-    if not season_to_range:
-        season_to_range = season_from
-
-    if not week_to_range:
-        week_to_range = week_from
+    week_to_range = week_to or week_from
 
     for site in dfs_site:
-        utils.game_parameters_validator(site, season_from)
+        utils.game_parameters_validator(site, season_from, season_to=season_to_range, week_from=week_from,
+                                        week_to=week_to_range)
 
-    games = dfs_site
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
     base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game={}&scsv=1"
-    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(weeks,seasons, games)]
+    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(weeks, seasons, dfs_site)]
 
     return game_urls
 
@@ -104,7 +99,7 @@ def get_game_data(game_urls=[]):
 
     for g in game_urls:
         # Parse the game from the query string to use as column value
-        #game = urlparse(g).query[22:24]
+        # game = urlparse(g).query[22:24]
         response = requests.get(g).text
         soup = BeautifulSoup(response, "lxml")
         data_string = StringIO(soup.find("pre").text)
@@ -124,9 +119,9 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = np.where(data['week'] >=10, urlparse(g).query[23:25], urlparse(g).query[22:24])
+        data['dfs_site'] = np.where(data['week'] >= 10, urlparse(g).query[23:25], urlparse(g).query[22:24])
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.25)
 
-    return(all_data)
+    return all_data

@@ -6,7 +6,9 @@ from nfldfs import games as games
 
 # Options for command line interface
 @click.command()
-@click.argument('dfs_site', nargs=-1)
+@click.argument('dfs_site',
+                required=True,
+                nargs=-1)
 @click.option('--season_from',
               type=int,
               prompt='Season beginning',
@@ -27,7 +29,6 @@ from nfldfs import games as games
               type=str,
               prompt='Enter a filename',
               help='Filename for your results. Omit the .csv file extension')
-
 def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename):
     """
     Simple program to scrape NFL daily fantasy points and salary information.
@@ -49,6 +50,7 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename)
     data = games.get_game_data(game_urls=g)
 
     return data.to_csv(f'data/{filename}.csv')
+
 
 if __name__ == "__main__":
     get_dfs_data()
