@@ -59,7 +59,8 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     weeks = [*range(week_from, week_to_range + 1)]
 
     base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game={}&scsv=1"
-    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(weeks, seasons, dfs_site)]
+    game_urls = [base_url.format(w, s, g) for w, s, g in itertools.product(
+        weeks, seasons, dfs_site)]
 
     return game_urls
 
@@ -119,7 +120,8 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = np.where(data['week'] >= 10, urlparse(g).query[23:25], urlparse(g).query[22:24])
+        data['dfs_site'] = np.where(data['week'] >= 10, urlparse(
+            g).query[23:25], urlparse(g).query[22:24])
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.25)

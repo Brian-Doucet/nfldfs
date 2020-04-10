@@ -8,7 +8,6 @@
 *__pycache__/*
 .pytest_cache
 
-
 # data
 #data/*
 
@@ -16,3 +15,7 @@
 
 # Scratch code
 dfstest.py
+
+*.egg-info
+/build/
+/dist/
