@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='nfldfs',
-      version='0.0.3',
+      version='0.0.4',
       author='Brian Doucet',
       author_email='doucetba@gmail.com',
       license='MIT',
@@ -23,7 +23,7 @@ setup(name='nfldfs',
       packages=['nfldfs'],
       tests_require=['pytest'],
       install_requires=[
-          'beautifulsoup==4.8.2',
+          'beautifulsoup4==4.8.2',
           'click==7.1.1',
           'lxml==4.5.0',
           'pandas==1.0.3',
