@@ -61,7 +61,7 @@ pip install -r requirements.txt
 
 If you're just looking for a bulk data download, it's recommended that you use the [CLI](https://github.com/BrianDoucet01/daily-fantasy-sports#using-the-cli) tool. It exports results directly to the `nfldfs/data` directory in `.csv` format. Head over there to see a [sample](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/data) of DraftKings salary and points data for the entire 2017 season.
 
-Here are some quick and dirty examples that illustrate how how to work with the package interactively. For more robust examples and a data dictionary, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
+Here are some quick and dirty examples that illustrate how to work with the package interactively. For more robust examples and a data dictionary, refer to the [docs](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/docs) folder.
 
 ### Working with the package interactively
 Several examples to show how you could work with the package directly in [IPython](https://ipython.org/) or a [Jupyter Notebook](https://jupyter.org/).
@@ -149,7 +149,7 @@ You run the CLI tool by calling it directly from within the package directory. R
 
 
 ## Future Work
-* Adding additional functionality to the CLI
+* Adding more functionality to the CLI tool
     * Options to preview data before output
     * Functions for analysis
 * Incorporating more data:
