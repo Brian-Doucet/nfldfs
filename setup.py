@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='nfldfs',
-      version='0.0.2',
+      version='0.0.3',
       author='Brian Doucet',
       author_email='doucetba@gmail.com',
       license='MIT',
