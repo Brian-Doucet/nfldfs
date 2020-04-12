@@ -41,15 +41,17 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename)
 
     """
     dfs_site = list(dfs_site)
-    g = games.find_games(dfs_site=dfs_site,
-                         season_from=season_from,
-                         week_from=week_from,
-                         season_to=season_to,
-                         week_to=week_to)
 
-    data = games.get_game_data(game_urls=g)
+    for site in dfs_site:
+        g = games.find_games(dfs_site=site,
+                            season_from=season_from,
+                            week_from=week_from,
+                            season_to=season_to,
+                            week_to=week_to)
 
-    return data.to_csv(f'data/{filename}.csv')
+        data = games.get_game_data(game_urls=g)
+
+        return data.to_csv(f'data/{filename}.csv')
 
 
 if __name__ == "__main__":
