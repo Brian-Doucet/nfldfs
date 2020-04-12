@@ -51,9 +51,9 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     week_to_range = week_to or week_from
 
-    for site in dfs_site:
-        utils.game_parameters_validator(site, season_from, season_to=season_to_range, week_from=week_from,
-                                        week_to=week_to_range)
+    # will exit if params are invalid
+    utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
+                                    week_to=week_to_range)
 
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]

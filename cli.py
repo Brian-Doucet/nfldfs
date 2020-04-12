@@ -7,8 +7,7 @@ from nfldfs import games as games
 # Options for command line interface
 @click.command()
 @click.argument('dfs_site',
-                required=True,
-                nargs=-1)
+                required=True)
 @click.option('--season_from',
               type=int,
               prompt='Season beginning',
@@ -40,7 +39,7 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename)
     be separated by a space. Refer to the package docs for more usage examples.
 
     """
-    dfs_site = list(dfs_site)
+
     g = games.find_games(dfs_site=dfs_site,
                          season_from=season_from,
                          week_from=week_from,
@@ -49,7 +48,7 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to, filename)
 
     data = games.get_game_data(game_urls=g)
 
-    return data.to_csv(f'data/{filename}.csv')
+    return data.to_csv(f'data/{filename}_{dfs_site}.csv')
 
 
 if __name__ == "__main__":
