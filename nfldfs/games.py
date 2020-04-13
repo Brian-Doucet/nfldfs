@@ -62,9 +62,9 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     game_urls = [base_url.format(w, s) for w, s in itertools.product(
         weeks, seasons)]
 
+    # Only unique URls
     game_urls = set(game_urls)
 
-    print(game_urls)
     return game_urls
 
 
