@@ -6,6 +6,8 @@
 [![HitCount](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports.svg)](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
+<img src="images/nfldfs.png" alt="Alice with Pig" style="width: 500px;"/>
+
 `nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape data for DraftKings, FanDuel, and Yahoo! from [rotoguru1](http://rotoguru.net) so that you don't have to.
 
 * [Features](https://github.com/BrianDoucet01/daily-fantasy-sports#features)
@@ -24,39 +26,18 @@
 
 
 ## Installation
-`nfldfs` is supported for Python 3 and can be installed from the repo. You will need [pip](https://pip.pypa.io/en/stable/) installed. The package was created using a [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) and is recommended but not required.
-
-*These are the steps for getting your dev environment up and running on a Mac*
+`nfldfs` is supported for Python 3 can be installed via pip:
+```bash
+pip install nfldfs
+```
+or from the repo (which may at times be more up-to-date):
 
 ```bash
 # Clone the repo
 git clone https://github.com/BrianDoucet01/nfldfs.git
-cd daily-fantasy-sports
-tree
-
-# If cloned successfully your directory structure should look like this
-# working in ~/daily-fantasy-sports
-├── LICENSE
-├── README.md
-├── nfldfs
-│   ├── __init__.py
-│   ├── games.py
-│   ├── tests
-│   │   ├── __init__.py
-│   │   ├── test_games.py
-│   │   └── test_utils.py
-│   └── utils.py
-└── requirements.txt
-
-# Create a virtual environment for nfldfs and then activate it
-virtualenv ~/virtualenvs/nfldfs -p python3 --no-site-packages
-. ~/virtualenvs/nfl/bin/activate
-
-# Install the project requirements
-pip install -r requirements.txt
+cd nfldfs
+python setup.py install
 ```
-
-
 ## Usage
 
 If you're just looking for a bulk data download, it's recommended that you use the [CLI](https://github.com/BrianDoucet01/daily-fantasy-sports#using-the-cli) tool. It exports results directly to the `nfldfs/data` directory in `.csv` format. Head over there to see a [sample](https://github.com/BrianDoucet01/daily-fantasy-sports/tree/master/data) of DraftKings salary and points data for the entire 2017 season.
@@ -139,7 +120,7 @@ yh       5631           car    14.7    10.0       yh
 ```
 
 ### Using the CLI
-The command line interface (CLI) was designed for those who just want to download a bunch of raw data to use elsewhere; be it a database, Excel, Google Sheets, or another program.
+The command line interface (CLI) was designed for those who just want to download the raw data to use elsewhere; be it a database, Excel, Google Sheets, or another program.
 
 You run the CLI tool by calling it directly from within the package directory. Results are sent to the `nfldfs/data` directory. Call `python cli.py --help` for more information on arguments and options.
 
@@ -149,6 +130,8 @@ You run the CLI tool by calling it directly from within the package directory. R
 
 
 ## Future Work
+This project is being actively worked on. If you'd like to contribute, please Fork the project and submit a Pull Request.
+
 * Adding more functionality to the CLI tool
     * Options to preview data before output
     * Functions for analysis
