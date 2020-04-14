@@ -27,4 +27,10 @@ setup(name='nfldfs',
           'click==7.1.1',
           'lxml==4.5.0',
           'pandas==1.0.3',
-          'requests==2.23.0'])
+          'requests==2.23.0'],
+     entry_points={
+        'console_scripts': [
+            'cli = cli:cli',
+            ],
+     },
+)
