@@ -29,11 +29,11 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to):
     """
     Simple program to scrape NFL daily fantasy points and salary information.
     Designed to be used as a bulk download tool. Results are returned in comma
-    delimited format (csv) to the /data directory. Check there to look at the
+    delimited format (csv) to the /data directory. Refer there to look at the
     'draftkings_sample_output.csv'.
 
-    DFS_SITE The name of the dfs site(s) to return data for. Multiple sites should
-    be separated by a space. Refer to the package docs for more usage examples.
+    DFS_SITE The name of the dfs site to return data for. Refer to the package
+    docs for more usage examples.
 
     """
     g = games.find_games(dfs_site=dfs_site,
@@ -43,10 +43,11 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to):
                             week_to=week_to)
 
     data = games.get_game_data(game_urls=g)
-    date_run = date.today()
+    run_date = date.today().strftime('%Y%m%d')
 
-    return data.to_csv(f'data/{dfs_site}_{date_run.day}/{date_run.month}.csv')
+    return data.to_csv(f'data/{dfs_site}_{run_date}.csv')
 
 
 if __name__ == "__main__":
+    print('Welcome to NFL DFS!\n')
     get_dfs_data()
