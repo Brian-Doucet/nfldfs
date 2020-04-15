@@ -94,7 +94,7 @@ gid
 ```
 
 
-**Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season.**
+**Get data for Yahoo! for week 2 across multiple seasons.**
 
 ```python
 # Get Yahoo! data for a single week aross multiple seasons
