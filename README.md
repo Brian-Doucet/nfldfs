@@ -53,7 +53,7 @@ Several examples to show how you could work with the package directly in [IPytho
 from nfldfs import games as games
 
 # Scrape DraftKings salary and points data for the entire 2019 season
-g = games.find_games(['dk'], 2019, 1, 2019, 17)
+g = games.find_games('dk', 2019, 1, 2019, 17)
 stats = games.get_game_data(g)
 
 type(stats)
@@ -97,26 +97,24 @@ gid
 **Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season.**
 
 ```python
-# Get data for DraftKings, FanDuel, and Yahoo! for week 2 of the 2018 season
-all_sites = games.find_games(['dk', 'fd', 'yh'], 2018, 2)
-week_2_stats = games.get_game_data(all_sites)
+# Get Yahoo! data for a single week aross multiple seasons
+yh = games.find_games(dfs_site='yh',
+                     season_from=2018,
+                     week_from=1,
+                     season_to=2019)
+                     week  year    player_name position team_name home_or_away  \
+          year gid                                                               
+          2018 7030     1  2018      Tennessee      Def       ten            a   
+               1225     1  2018   Manning, Eli       QB       nyg            h   
+          2019 1539     1  2019  Jones, Daniel       QB       nyg            a   
+               5424     1  2019  Diggs, Stefon       WR       min            h   
 
-# Sample of 1 row for each dfs site
-week_2_stats.groupby('dfs_site').apply(lambda x: x.sample(1))
-
-                week year    player_name   position   team_name   home_or_away  \
-dfs_site gid                                                                
-dk       7018     2  2018     New England      Def       nwe            a   
-fd       3670     2  2018   Ginn Jr., Ted       WR       nor            h   
-yh       5631     2  2018  Ridley, Calvin       WR       atl            h   
-
-                opponent_name  points salary   dfs_site  
-dfs_site gid                                          
-dk       7018           jac     3.0  3000.0       dk  
-fd       3670           cle     5.5  6800.0       fd  
-yh       5631           car    14.7    10.0       yh  
-
-
+                    opponent_name  points  salary dfs_site  
+          year gid                                          
+          2018 7030           mia   11.00    12.0       yh  
+               1225           jac    8.16    23.0       yh  
+          2019 1539           dal   -0.82    20.0       yh  
+               5424           atl    4.70    25.0       yh  
 ```
 
 ### Using the CLI
