@@ -123,8 +123,7 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = np.where(data['week'] >= 10, urlparse(
-            g).query[23:25], urlparse(g).query[22:24])
+        data['dfs_site'] = g
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.25)
