@@ -25,7 +25,7 @@ from nfldfs import games as games
               type=int,
               prompt='Week ending',
               help='The week number at the end of the search range (inclusive)')
-def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to):
+def main(dfs_site, season_from, season_to, week_from, week_to):
     """
     Simple program to scrape NFL daily fantasy points and salary information.
     Designed to be used as a bulk download tool. Results are returned in comma
@@ -50,4 +50,4 @@ def get_dfs_data(dfs_site, season_from, season_to, week_from, week_to):
 
 if __name__ == "__main__":
     print('Welcome to NFL DFS!\n')
-    get_dfs_data()
+    main()
