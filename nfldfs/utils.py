@@ -27,9 +27,9 @@ def validate_week(week_from, week_to):
 
 def game_parameters_validator(dfs_site, season_from, season_to, week_from, week_to):
 
-    config = {'dk': [2014, 2015, 2016, 2017, 2018, 2019],
-              'fd': [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
-              'yh': [2016, 2017, 2018, 2019]}
+    config = {'dk': [2014, 2015, 2016, 2017, 2018, 2019, 2020],
+              'fd': [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+              'yh': [2016, 2017, 2018, 2019, 2020]}
 
     valid_season_numbers = config.get(dfs_site)
 
@@ -39,4 +39,3 @@ def game_parameters_validator(dfs_site, season_from, season_to, week_from, week_
     validate_season(season_from=season_from, season_to=season_to, valid_seasons=valid_season_numbers)
 
     validate_week(week_from=week_from, week_to=week_to)
-

@@ -46,24 +46,32 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     ['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1',
     'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
     """
-
     season_to_range = season_to or season_from
-
     week_to_range = week_to or week_from
 
     utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
                                     week_to=week_to_range)
 
+    current_season = 2020
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
+    current_season_urls = []
+    previous_season_urls = []
 
-    base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game=" + f"{dfs_site}&scsv=1"
-    game_urls = [base_url.format(w, s) for w, s in itertools.product(
-        weeks, seasons)]
+    if seasons[-1] == current_season:
+        for w in weeks:
+            base_url = base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&game={}&scsv=1".format(w, dfs_site)
+            game_urls = current_season_urls.append(base_url.format(w))
+    else:
+        for w, s in itertools.product(weeks, seasons[:-1]):
+            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game=" + f"{dfs_site}&scsv=1"
+            game_urls = previous_season_urls.append(base_url.format(w, s))
 
-    # Only unique URls
-    game_urls = set(game_urls)
+    current_season_urls = set(current_season_urls)
+    previous_season_urls = set(previous_season_urls)
+
+    game_urls = current_season_urls.union(previous_season_urls)
 
     return game_urls
 
