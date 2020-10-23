@@ -8,7 +8,12 @@
 
 ![](images/nfldfs_banner.png)
 
+<p style="text-align: center;"><b>Data for the 2020 season is now available!</b></p>
+
+
 `nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape data for DraftKings, FanDuel, and Yahoo! from [rotoguru1](http://rotoguru.net) so that you don't have to.
+
+
 
 * [Features](https://github.com/BrianDoucet01/daily-fantasy-sports#features)
 * [Installation](https://github.com/BrianDoucet01/daily-fantasy-sports#installation)
