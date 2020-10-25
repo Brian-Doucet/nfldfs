@@ -12,6 +12,8 @@ import requests
 
 from nfldfs import utils as utils
 
+CURRENT_SEASON = 2020
+
 
 # Function to create game search parameters
 def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
@@ -52,21 +54,21 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
                                     week_to=week_to_range)
 
-    current_season = 2020
+    
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
     current_season_urls = []
     previous_season_urls = []
 
-    if seasons[-1] == current_season:
+    if seasons[-1] == CURRENT_SEASON:
         for w in weeks:
-            base_url = base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&game={}&scsv=1".format(w, dfs_site)
-            game_urls = current_season_urls.append(base_url.format(w))
+            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&game={}&scsv=1".format(w, dfs_site)
+            current_season_urls.append(base_url)
     else:
         for w, s in itertools.product(weeks, seasons[:-1]):
-            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game=" + f"{dfs_site}&scsv=1"
-            game_urls = previous_season_urls.append(base_url.format(w, s))
+            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game={}&scsv=1".format(w, s, dfs_site)
+            previous_season_urls.append(base_url)
 
     current_season_urls = set(current_season_urls)
     previous_season_urls = set(previous_season_urls)
