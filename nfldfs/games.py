@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import itertools
+import re
 from io import StringIO
-from urllib.parse import urlparse
 import time
+
 
 from bs4 import BeautifulSoup
 import numpy as np
@@ -11,8 +12,6 @@ import pandas as pd
 import requests
 
 from nfldfs import utils as utils
-
-CURRENT_SEASON = 2020
 
 
 # Function to create game search parameters
@@ -51,27 +50,24 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     season_to_range = season_to or season_from
     week_to_range = week_to or week_from
 
+    # Ensure seasons are valid
     utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
                                     week_to=week_to_range)
 
-    
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
-    current_season_urls = []
-    previous_season_urls = []
+    include_current_season = utils.CURRENT_SEASON in seasons
 
-    if seasons[-1] == CURRENT_SEASON:
-        for w in weeks:
-            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&game={}&scsv=1".format(w, dfs_site)
-            current_season_urls.append(base_url)
-    else:
-        for w, s in itertools.product(weeks, seasons[:-1]):
-            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game={}&scsv=1".format(w, s, dfs_site)
-            previous_season_urls.append(base_url)
+    current_season_urls = set([utils.CURRENT_SEASON_BASE_URL.format(w, dfs_site)
+        for w in weeks 
+        if include_current_season
+    ])
 
-    current_season_urls = set(current_season_urls)
-    previous_season_urls = set(previous_season_urls)
+    previous_season_urls = set([utils.PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
+        for w, s in itertools.product(weeks, seasons )
+        if s != utils.CURRENT_SEASON
+    ])
 
     game_urls = current_season_urls.union(previous_season_urls)
 
@@ -111,10 +107,11 @@ def get_game_data(game_urls=[]):
     """
     all_data = pd.DataFrame()
 
-    for g in game_urls:
-        # Parse the game from the query string to use as column value
-        # game = urlparse(g).query[22:24]
-        response = requests.get(g).text
+    for url in game_urls:
+        # Parse the name of the game site from the query string to use as column value
+        dfs_site_name = re.search('game=(.*)&scsv=1', url).group(1)
+ 
+        response = requests.get(url).text
         soup = BeautifulSoup(response, "lxml")
         data_string = StringIO(soup.find("pre").text)
         data = pd.read_csv(data_string,
@@ -133,7 +130,7 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = g
+        data['dfs_site'] = dfs_site_name
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.25)
