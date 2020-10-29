@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-from nfldfs import utils as utils
+from nfldfs import constants, utils
 
 
 # Function to create game search parameters
@@ -24,7 +24,7 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     Parameters
     ----------
-    dfs_site : list of str
+    dfs_site : str
         Abbreviation for each daily fantasy site to find data for.
         Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!
     season_from: int
@@ -43,31 +43,34 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     Example
     -------
     URLs for week 1 of the 2014 season for DraftKings and FanDuel.
-    >>> find_games(dfs_site=['dk', 'fd'], season_from=2014, week_from=1)
-    ['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1',
-    'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
+    >>> find_games(dfs_site='dk', season_from=2014, week_from=1)
+
+    >>>['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1']
     """
     season_to_range = season_to or season_from
     week_to_range = week_to or week_from
 
     # Ensure seasons are valid
-    utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
+    utils.game_parameters_validator(dfs_site,
+                                    season_from,
+                                    season_to=season_to_range,
+                                    week_from=week_from,
                                     week_to=week_to_range)
 
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
-    include_current_season = utils.CURRENT_SEASON in seasons
+    include_current_season = constants.CURRENT_SEASON in seasons
 
-    current_season_urls = set([utils.CURRENT_SEASON_BASE_URL.format(w, dfs_site)
-        for w in weeks 
-        if include_current_season
-    ])
+    current_season_urls = set([constants.CURRENT_SEASON_BASE_URL.format(w, dfs_site)
+                               for w in weeks
+                               if include_current_season
+                               ])
 
-    previous_season_urls = set([utils.PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
-        for w, s in itertools.product(weeks, seasons )
-        if s != utils.CURRENT_SEASON
-    ])
+    previous_season_urls = set([constants.PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
+                                for w, s in itertools.product(weeks, seasons)
+                                if s != constants.CURRENT_SEASON
+                                ])
 
     game_urls = current_season_urls.union(previous_season_urls)
 
@@ -110,7 +113,7 @@ def get_game_data(game_urls=[]):
     for url in game_urls:
         # Parse the name of the game site from the query string to use as column value
         dfs_site_name = re.search('game=(.*)&scsv=1', url).group(1)
- 
+
         response = requests.get(url).text
         soup = BeautifulSoup(response, "lxml")
         data_string = StringIO(soup.find("pre").text)
