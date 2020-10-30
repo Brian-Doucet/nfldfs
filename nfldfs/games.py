@@ -11,7 +11,8 @@ import numpy as np
 import pandas as pd
 import requests
 
-from nfldfs import constants, utils
+from nfldfs.utils import game_parameters_validator
+from nfldfs.constants import CURRENT_SEASON, CURRENT_SEASON_BASE_URL, PREVIOUS_SEASON_BASE_URL
 
 
 # Function to create game search parameters
@@ -51,25 +52,25 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     week_to_range = week_to or week_from
 
     # Ensure seasons are valid
-    utils.game_parameters_validator(dfs_site,
-                                    season_from,
-                                    season_to=season_to_range,
-                                    week_from=week_from,
-                                    week_to=week_to_range)
+    game_parameters_validator(dfs_site,
+                              season_from,
+                              season_to=season_to_range,
+                              week_from=week_from,
+                              week_to=week_to_range)
 
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
-    include_current_season = constants.CURRENT_SEASON in seasons
+    include_current_season = CURRENT_SEASON in seasons
 
-    current_season_urls = set([constants.CURRENT_SEASON_BASE_URL.format(w, dfs_site)
+    current_season_urls = set([CURRENT_SEASON_BASE_URL.format(w, dfs_site)
                                for w in weeks
                                if include_current_season
                                ])
 
-    previous_season_urls = set([constants.PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
+    previous_season_urls = set([PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
                                 for w, s in itertools.product(weeks, seasons)
-                                if s != constants.CURRENT_SEASON
+                                if s != CURRENT_SEASON
                                 ])
 
     game_urls = current_season_urls.union(previous_season_urls)
