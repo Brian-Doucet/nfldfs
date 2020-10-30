@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
 import itertools
+import re
 from io import StringIO
-from urllib.parse import urlparse
 import time
+
 
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
 import requests
 
-from nfldfs import utils as utils
+from nfldfs.utils import game_parameters_validator
+from nfldfs.constants import CURRENT_SEASON, CURRENT_SEASON_BASE_URL, PREVIOUS_SEASON_BASE_URL
 
 
 # Function to create game search parameters
@@ -23,7 +25,7 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
 
     Parameters
     ----------
-    dfs_site : list of str
+    dfs_site : str
         Abbreviation for each daily fantasy site to find data for.
         Acceptable values: 'dk': DraftKings, 'fd': FanDuel, 'yh': Yahoo!
     season_from: int
@@ -42,34 +44,34 @@ def find_games(dfs_site, season_from, week_from, season_to=None, week_to=None):
     Example
     -------
     URLs for week 1 of the 2014 season for DraftKings and FanDuel.
-    >>> find_games(dfs_site=['dk', 'fd'], season_from=2014, week_from=1)
-    ['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1',
-    'http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=fd&scsv=1']
+    >>> find_games(dfs_site='dk', season_from=2014, week_from=1)
+
+    >>>['http://rotoguru1.com/cgi-bin/fyday.pl?week=1&year=2014&game=dk&scsv=1']
     """
     season_to_range = season_to or season_from
     week_to_range = week_to or week_from
 
-    utils.game_parameters_validator(dfs_site, season_from, season_to=season_to_range, week_from=week_from,
-                                    week_to=week_to_range)
+    # Ensure seasons are valid
+    game_parameters_validator(dfs_site,
+                              season_from,
+                              season_to=season_to_range,
+                              week_from=week_from,
+                              week_to=week_to_range)
 
-    current_season = 2020
     seasons = [*range(season_from, season_to_range + 1)]
     weeks = [*range(week_from, week_to_range + 1)]
 
-    current_season_urls = []
-    previous_season_urls = []
+    include_current_season = CURRENT_SEASON in seasons
 
-    if seasons[-1] == current_season:
-        for w in weeks:
-            base_url = base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&game={}&scsv=1".format(w, dfs_site)
-            game_urls = current_season_urls.append(base_url.format(w))
-    else:
-        for w, s in itertools.product(weeks, seasons[:-1]):
-            base_url = "http://rotoguru1.com/cgi-bin/fyday.pl?week={}&year={}&game=" + f"{dfs_site}&scsv=1"
-            game_urls = previous_season_urls.append(base_url.format(w, s))
+    current_season_urls = set([CURRENT_SEASON_BASE_URL.format(w, dfs_site)
+                               for w in weeks
+                               if include_current_season
+                               ])
 
-    current_season_urls = set(current_season_urls)
-    previous_season_urls = set(previous_season_urls)
+    previous_season_urls = set([PREVIOUS_SEASON_BASE_URL.format(w, s, dfs_site)
+                                for w, s in itertools.product(weeks, seasons)
+                                if s != CURRENT_SEASON
+                                ])
 
     game_urls = current_season_urls.union(previous_season_urls)
 
@@ -109,10 +111,11 @@ def get_game_data(game_urls=[]):
     """
     all_data = pd.DataFrame()
 
-    for g in game_urls:
-        # Parse the game from the query string to use as column value
-        # game = urlparse(g).query[22:24]
-        response = requests.get(g).text
+    for url in game_urls:
+        # Parse the name of the game site from the query string to use as column value
+        dfs_site_name = re.search('game=(.*)&scsv=1', url).group(1)
+
+        response = requests.get(url).text
         soup = BeautifulSoup(response, "lxml")
         data_string = StringIO(soup.find("pre").text)
         data = pd.read_csv(data_string,
@@ -131,7 +134,7 @@ def get_game_data(game_urls=[]):
                                   'points',
                                   'salary']
                            )
-        data['dfs_site'] = g
+        data['dfs_site'] = dfs_site_name
         all_data = pd.concat(objs=[all_data, data])
 
         time.sleep(0.25)

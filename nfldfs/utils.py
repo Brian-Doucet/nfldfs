@@ -7,10 +7,12 @@ def validate_season(season_from, season_to, valid_seasons):
         raise Exception('Season From must be less than or equal to Season To')
 
     if season_from not in valid_seasons:
-        raise Exception('Season From {} is out of scope of the valid seasons for this site: {}'.format(season_from, valid_seasons))
+        raise Exception('Season From {} is out of scope of the valid seasons for this site: {}'.format(
+            season_from, valid_seasons))
 
     if season_to not in valid_seasons:
-        raise Exception('Season To {} is out of scope of the valid seasons for this site: {}'.format(season_to, valid_seasons))
+        raise Exception('Season To {} is out of scope of the valid seasons for this site: {}'.format(
+            season_to, valid_seasons))
 
 
 def validate_week(week_from, week_to):
@@ -33,9 +35,10 @@ def game_parameters_validator(dfs_site, season_from, season_to, week_from, week_
 
     valid_season_numbers = config.get(dfs_site)
 
-    if not valid_season_numbers: # unable to find the key
+    if not valid_season_numbers:  # unable to find the key
         raise Exception('Invalid dfs site')
 
-    validate_season(season_from=season_from, season_to=season_to, valid_seasons=valid_season_numbers)
+    validate_season(season_from=season_from, season_to=season_to,
+                    valid_seasons=valid_season_numbers)
 
     validate_week(week_from=week_from, week_to=week_to)
