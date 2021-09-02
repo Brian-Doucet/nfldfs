@@ -22,3 +22,4 @@ dfstest.py
 
 # Virtual Environment
 venv/
+env/
