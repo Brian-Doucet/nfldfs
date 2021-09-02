@@ -3,12 +3,12 @@
 [![codecov](https://codecov.io/gh/BrianDoucet01/nfldfs/branch/master/graph/badge.svg)](https://codecov.io/gh/BrianDoucet01/nfldfs)
 ![Testing Check](https://github.com/BrianDoucet01/nfldfs/workflows/Testing%20Check/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![HitCount](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports.svg)](http://hits.dwyl.com/BrianDoucet01/daily-fantasy-sports)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FBrian-Doucet%2Fnfldfs&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%2383AAD9&title=Repo+Views&edge_flat=false)](https://hits.seeyoufarm.com)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
 ![](images/nfldfs_banner.png)
 
-<h1 align="center">Data for 2020 Season Now Available!</h1>
+<h1 align="center">Data for 2021 Season Now Available!</h1>
 
 
 `nfldfs` is a Python package for NFL daily fantasy sports analysis. It provides an easy interface to scrape data for DraftKings, FanDuel, and Yahoo! from [rotoguru1](http://rotoguru.net) so that you don't have to.
@@ -72,30 +72,30 @@ array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17])
 stats.sample(10)
 
        week year      player_name       position team_name home_or_away  \
-gid                                                                    
-5588    16  2019      Penny, Elijhaa       RB       nyg            a   
-5765    11  2019    Spencer, Diontae       WR       den            a   
-5556     3  2019      Samuel, Curtis       WR       car            a   
-5790    17  2019    Blake, Christian       WR       atl            a   
-5649    16  2019      Foster, Robert       WR       buf            a   
-7031    12  2019          Washington      Def       was            h   
-4675    14  2019       Henry, Hunter       TE       lac            a   
-1403     3  2019        Dalton, Andy       QB       cin            a   
-5386     3  2019      Lockett, Tyler       WR       sea            h   
-1519     7  2019  Trubisky, Mitchell       QB       chi            h  
+gid
+5588    16  2019      Penny, Elijhaa       RB       nyg            a
+5765    11  2019    Spencer, Diontae       WR       den            a
+5556     3  2019      Samuel, Curtis       WR       car            a
+5790    17  2019    Blake, Christian       WR       atl            a
+5649    16  2019      Foster, Robert       WR       buf            a
+7031    12  2019          Washington      Def       was            h
+4675    14  2019       Henry, Hunter       TE       lac            a
+1403     3  2019        Dalton, Andy       QB       cin            a
+5386     3  2019      Lockett, Tyler       WR       sea            h
+1519     7  2019  Trubisky, Mitchell       QB       chi            h
 
-      opponent_name  points  salary dfs_site  
-gid                                          
-5588           was    0.00  3000.0       dk  
-5765           min    0.00  3000.0       dk  
-5556           ari   16.30  4800.0       dk  
-5790           tam    0.00  3000.0       dk  
-5649           nwe    0.00  3000.0       dk  
-7031           det   21.00  3000.0       dk  
-4675           jac   11.90  5100.0       dk  
-1403           buf   18.06  5300.0       dk  
-5386           nor   35.40  6200.0       dk  
-1519           nor   20.04  5100.0       dk  
+      opponent_name  points  salary dfs_site
+gid
+5588           was    0.00  3000.0       dk
+5765           min    0.00  3000.0       dk
+5556           ari   16.30  4800.0       dk
+5790           tam    0.00  3000.0       dk
+5649           nwe    0.00  3000.0       dk
+7031           det   21.00  3000.0       dk
+4675           jac   11.90  5100.0       dk
+1403           buf   18.06  5300.0       dk
+5386           nor   35.40  6200.0       dk
+1519           nor   20.04  5100.0       dk
 ```
 
 
@@ -108,18 +108,18 @@ yh = games.find_games(dfs_site='yh',
                      week_from=1,
                      season_to=2019)
                      week  year    player_name position team_name home_or_away  \
-          year gid                                                               
-          2018 7030     1  2018      Tennessee      Def       ten            a   
-               1225     1  2018   Manning, Eli       QB       nyg            h   
-          2019 1539     1  2019  Jones, Daniel       QB       nyg            a   
-               5424     1  2019  Diggs, Stefon       WR       min            h   
+          year gid
+          2018 7030     1  2018      Tennessee      Def       ten            a
+               1225     1  2018   Manning, Eli       QB       nyg            h
+          2019 1539     1  2019  Jones, Daniel       QB       nyg            a
+               5424     1  2019  Diggs, Stefon       WR       min            h
 
-                    opponent_name  points  salary dfs_site  
-          year gid                                          
-          2018 7030           mia   11.00    12.0       yh  
-               1225           jac    8.16    23.0       yh  
-          2019 1539           dal   -0.82    20.0       yh  
-               5424           atl    4.70    25.0       yh  
+                    opponent_name  points  salary dfs_site
+          year gid
+          2018 7030           mia   11.00    12.0       yh
+               1225           jac    8.16    23.0       yh
+          2019 1539           dal   -0.82    20.0       yh
+               5424           atl    4.70    25.0       yh
 ```
 
 ### Using the CLI
