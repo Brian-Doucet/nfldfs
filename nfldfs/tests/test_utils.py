@@ -22,9 +22,10 @@ def test_game_parameters_validator_raise_error_site():
 # Raise an error for invalid year
 def test_game_parameters_validator_raise_error_year():
     with pytest.raises(Exception) as info:
-        utils.game_parameters_validator('dk', '2019', '2019', 1, 1)
+        utils.game_parameters_validator('dk', '2012', '2019', 1, 1)
 
-    assert "Season From 2019 is out of scope of the valid seasons for this site: [2014, 2015, 2016, 2017, 2018, 2019, 2020]" in str(
+
+    assert "Season From 2012 is out of scope of the valid seasons for this site: [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]" in str(
         info.value)
 
 
@@ -32,7 +33,7 @@ def test_game_parameters_validator_raise_error_season_to():
     with pytest.raises(Exception) as info:
         utils.game_parameters_validator('yh', 2016, 2022, 1, 15)
 
-    assert ("Season To 2022 is out of scope of the valid seasons for this site: [2016, 2017, 2018, 2019, 2020]") in str(
+    assert ("Season To 2022 is out of scope of the valid seasons for this site: [2016, 2017, 2018, 2019, 2020, 2021]") in str(
         info.value)
 
 # Set of tests to validate that errors are raised for invalid week numbers
