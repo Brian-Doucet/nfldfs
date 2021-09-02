@@ -39,7 +39,7 @@ or from the repo (which may at times be more up-to-date):
 
 ```bash
 # Clone the repo
-git clone https://github.com/BrianDoucet01/nfldfs.git
+git clone https://github.com/Brian-Doucet/nfldfs.git
 cd nfldfs
 python setup.py install
 ```
